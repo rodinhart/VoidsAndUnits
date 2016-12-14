@@ -27,29 +27,26 @@ exports.poll = IO.IO.create(ret => {
 // jshint browser: true
 test = document.getElementById("test")
 
+const onMove = p => () => Action.Move.create(p)
+const onNewGame = () => Action.NewGame.value
+
 // render :: Game => IO ()
 exports.render = x => IO.IO.create(ret => {
+  var cells;
+
+  cells = x.board.map((c, i) => (
+    <Icon color={c === ' ' ? "grey" : "black" } inverted={c === ' '} name={c === 'x' ? "x" : (c === 'o' ? "radio" : "square")} onClick={c === ' ' ? dispatch(onMove(i)) : undefined} size="massive" />
+  ))
   ReactDOM.render(
     <Container>
-      <Icon onClick={dispatch(onMove)} name="x" size="massive" />
-      <Icon inverted name="square" size="massive" />
-      <Icon name="x" size="massive" />
-      <Divider />
-      <Icon name="radio" size="massive" />
-      <Icon name="x" size="massive" />
-      <Icon name="x" size="massive" />
-      <Divider />
-      <Icon name="x" size="massive" />
-      <Icon name="radio" size="massive" />
-      <Icon name="radio" size="massive" />
-      <Divider />
-      <Button>New game {x.player}</Button>
+      { cells[0] } { cells[1] } { cells[2] } 
+      <Divider hidden />
+      { cells[3] } { cells[4] } { cells[5] } 
+      <Divider hidden />
+      { cells[6] } { cells[7] } { cells[8] } 
+      <Divider hidden />
+      <Button onClick={dispatch(onNewGame)}>New game</Button>
     </Container>, test)
 
   return ret()
 })
-
-function onMove() {
-  console.log("move")
-  return Action.Move.create(1)
-}
