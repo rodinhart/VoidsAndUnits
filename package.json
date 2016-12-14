@@ -1,0 +1,37 @@
+{
+  "author": "Rodin van der Hart",
+  "bugs": {
+    "url": "https://github.com/rodinhart/VoidsAndUnits/issues"
+  },
+  "dependencies": {
+    "react": "^15.4.1",
+    "react-dom": "^15.4.1",
+    "semantic-ui-css": "^2.2.4",
+    "semantic-ui-react": "^0.62.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.20.0",
+    "babel-loader": "^6.2.9",
+    "babel-preset-react": "^6.16.0",
+    "webpack": "^1.14.0"
+  },
+  "homepage": "https://github.com/rodinhart/VoidsAndUnits",
+  "keywords": [
+    "PureScript",
+    "semantic-ui",
+    "react",
+    "noughts and crosses",
+    "tic-tac-toe"
+  ],
+  "license": "MIT",
+  "name": "voidsandunits",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rodinhart/VoidsAndUnits.git"
+  },
+  "scripts": {
+    "compile": "pulp build",
+    "pack": "webpack --config ./webpack.config.js"
+  },
+  "version": "0.1.0"
+}
