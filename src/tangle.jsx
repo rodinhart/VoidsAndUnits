@@ -8,6 +8,7 @@ var ReactDOM = require("react-dom")
 var Button = require("semantic-ui-react").Button
 var Container = require("semantic-ui-react").Container
 var Divider = require("semantic-ui-react").Divider
+var Header = require("semantic-ui-react").Header
 var Icon = require("semantic-ui-react").Icon
 
 var handler, test;
@@ -38,7 +39,9 @@ exports.render = x => IO.IO.create(ret => {
     <Icon color={c === ' ' ? "grey" : "black" } inverted={c === ' '} name={c === 'x' ? "x" : (c === 'o' ? "radio" : "square")} onClick={c === ' ' ? dispatch(onMove(i)) : undefined} size="massive" />
   ))
   ReactDOM.render(
-    <Container>
+    <Container textAlign="center">
+      <Divider hidden />
+      <Header size="huge">Voids and Units</Header>
       { cells[0] } { cells[1] } { cells[2] } 
       <Divider hidden />
       { cells[3] } { cells[4] } { cells[5] } 
