@@ -1,9 +1,7 @@
+var LiveReloadPlugin = require('webpack-livereload-plugin')
+
 module.exports = {
   entry: "./src/index.js",
-  output: {
-    filename: "./public/bundle.js",
-    chunkFilename: "./public/bundle.js"
-  },
   module: {
     loaders: [
       {
@@ -14,5 +12,12 @@ module.exports = {
       }
     ]
   },
+  output: {
+    filename: "./public/bundle.js",
+    chunkFilename: "./public/bundle.js"
+  },
+  plugins: [
+    new LiveReloadPlugin()
+  ],
   target: "web"
 }
