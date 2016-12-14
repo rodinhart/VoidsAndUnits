@@ -14,6 +14,7 @@
     "babel-loader": "^6.2.9",
     "babel-preset-react": "^6.16.0",
     "concurrently": "^3.1.0",
+    "copy-webpack-plugin": "^4.0.1",
     "webpack": "^1.14.0",
     "webpack-livereload-plugin": "^0.9.0"
   },
@@ -34,7 +35,7 @@
   "scripts": {
     "compile": "pulp build",
     "pack": "webpack -w",
-    "server": "http-server .",
+    "server": "http-server ./public",
     "start": "concurrently -k \"npm run pack\" \"npm run server\""
   },
   "version": "0.1.0"

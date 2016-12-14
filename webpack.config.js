@@ -1,3 +1,4 @@
+var CopyWebpackPlugin = require('copy-webpack-plugin')
 var LiveReloadPlugin = require('webpack-livereload-plugin')
 
 module.exports = {
@@ -17,7 +18,11 @@ module.exports = {
     chunkFilename: "./public/bundle.js"
   },
   plugins: [
-    new LiveReloadPlugin()
+    new LiveReloadPlugin(),
+    new CopyWebpackPlugin([
+      { from: "src/index.html", to: "public/index.html" },
+      { context: "node_modules", from: "semantic-ui-css", to: "public/semantic-ui-css" }
+    ])
   ],
   target: "web"
 }
