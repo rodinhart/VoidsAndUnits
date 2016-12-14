@@ -2,7 +2,7 @@ var CopyWebpackPlugin = require('copy-webpack-plugin')
 var LiveReloadPlugin = require('webpack-livereload-plugin')
 
 module.exports = {
-  entry: "./src/index.js",
+  entry: ["./src/index.html", "./src/index.js"],
   module: {
     loaders: [
       {
@@ -10,6 +10,11 @@ module.exports = {
         exclude: /node_modules/,
         loaders: ["babel-loader"],
         babelrc: true
+      },
+      {
+        test: /\.html$/,
+        exclude: /node_modules/,
+        loaders: ["raw-loader"]
       }
     ]
   },
