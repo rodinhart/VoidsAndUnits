@@ -25,10 +25,10 @@ exports.poll = IO.IO.create(ret => {
   }
 })
 
-// jshint browser: true
-test = document.getElementById("test")
-
+// onMove :: Int -> Action
 const onMove = p => () => Action.Move.create(p)
+
+// onNewGame :: () -> Action
 const onNewGame = () => Action.NewGame.value
 
 // render :: Game => IO ()
@@ -49,7 +49,7 @@ exports.render = x => IO.IO.create(ret => {
       { cells[6] } { cells[7] } { cells[8] } 
       <Divider hidden />
       <Button onClick={dispatch(onNewGame)}>New game</Button>
-    </Container>, test)
+    </Container>, document.getElementById("test")) // jshint browser: true
 
   return ret()
 })
