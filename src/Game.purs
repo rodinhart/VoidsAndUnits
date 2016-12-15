@@ -2,8 +2,8 @@ module Game where
 
 import Data.List
 import Array (get, set)
-import Data.Maybe (maybe)
-import Prelude ((==), ($), (>=), (+))
+import Data.Maybe (Maybe(..))
+import Prelude ((==), (>=), (+))
 
 type Board = Array Char
 
@@ -14,10 +14,7 @@ type Game = {
 }
 
 move :: Game -> Int -> Game
-move game p = think $ game {
-  board = set p game.player game.board,
-  player = toggle game.player
-}
+move game p = let g = game { board = set p game.player game.board, player = toggle game.player } in think (head (moves g.board)) g
 
 moves :: Board -> List Int
 moves board = moves_ 0 board where
@@ -31,11 +28,12 @@ newgame game = game {
   player = 'x'
 }
 
-think :: Game -> Game
-think game = game {
-  board = set (let xs = moves game.board in maybe 0 (\x -> x) (head xs)) game.player game.board,
+think :: Maybe Int -> Game -> Game
+think (Just p) game = game {
+  board = set p game.player game.board,
   player = toggle game.player
 }
+think _ game = game
 
 toggle :: Char -> Char
 toggle 'x' = 'o'
