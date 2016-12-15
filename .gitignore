@@ -3,5 +3,6 @@
 /npm-debug.log
 /output/
 /.psci*
+/.psc-ide-port
 /public/
 /.pulp-cache/

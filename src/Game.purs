@@ -1,8 +1,9 @@
 module Game where
 
-import Array (modify)
 import Data.List
-import Prelude ((==))
+import Array (get, set)
+import Data.Maybe (maybe)
+import Prelude ((==), ($), (>=), (+))
 
 type Board = Array Char
 
@@ -13,16 +14,30 @@ type Game = {
 }
 
 move :: Game -> Int -> Game
-move game p = game {
-  board = modify p (\_ -> game.player) game.board,
-  player = if game.player == 'x' then 'o' else 'x'
+move game p = think $ game {
+  board = set p game.player game.board,
+  player = toggle game.player
 }
 
-moves :: Board -> List Board
-moves board = board : Nil
+moves :: Board -> List Int
+moves board = moves_ 0 board where
+  moves_ :: Int -> Board -> List Int
+  moves_ p _ | p >= 9 = Nil
+  moves_ p b = if get p b == ' ' then p : moves_ (p + 1) b else moves_ (p + 1) b
 
 newgame :: Game -> Game
 newgame game = game {
   board = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
   player = 'x'
 }
+
+think :: Game -> Game
+think game = game {
+  board = set (let xs = moves game.board in maybe 0 (\x -> x) (head xs)) game.player game.board,
+  player = toggle game.player
+}
+
+toggle :: Char -> Char
+toggle 'x' = 'o'
+toggle 'o' = 'x'
+toggle x = x -- make player an enum
